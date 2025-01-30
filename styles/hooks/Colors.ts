@@ -6,6 +6,7 @@ export type Colors = {
   contentSecondary: string;
   contentAccent: string;
   backgroundBlueTint: string;
+  borderPrimary: string;
 };
 
 export type ColorMode = {
@@ -22,6 +23,7 @@ export const ThemeColors: ColorMode = {
     contentSecondary: "#00000052",
     contentAccent: "#DBA604",
     backgroundBlueTint: "#8794FF33",
+    borderPrimary: "#E2E2E2",
   },
   dark: {
     backgroundPrimary: "#000000",
@@ -30,5 +32,6 @@ export const ThemeColors: ColorMode = {
     contentSecondary: "#FFFFFF52",
     contentAccent: "#DBA604",
     backgroundBlueTint: "#8794FF33",
+    borderPrimary: "#2D2D2D",
   },
 };
