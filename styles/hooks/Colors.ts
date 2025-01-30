@@ -1,7 +1,11 @@
 // add color types here
 export type Colors = {
   backgroundPrimary: string;
+  backgroundSecondary: string;
   contentPrimary: string;
+  contentSecondary: string;
+  contentAccent: string;
+  backgroundBlueTint: string;
 };
 
 export type ColorMode = {
@@ -13,10 +17,18 @@ export type ColorMode = {
 export const ThemeColors: ColorMode = {
   light: {
     backgroundPrimary: "#F9F9F9",
-    contentPrimary: "#11181C",
+    backgroundSecondary: "#FFFFFF",
+    contentPrimary: "#000000",
+    contentSecondary: "#00000052",
+    contentAccent: "#DBA604",
+    backgroundBlueTint: "#8794FF33",
   },
   dark: {
-    backgroundPrimary: "#11181C",
+    backgroundPrimary: "#000000",
+    backgroundSecondary: "#1F1F1F",
     contentPrimary: "#F9F9F9",
+    contentSecondary: "#FFFFFF52",
+    contentAccent: "#DBA604",
+    backgroundBlueTint: "#8794FF33",
   },
 };
