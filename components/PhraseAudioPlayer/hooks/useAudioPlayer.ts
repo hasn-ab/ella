@@ -23,7 +23,8 @@ export function useAudioPlayer() {
     // find prefix start times
     return phrases.reduce(
       (acc, item, index) => {
-        acc.push(acc[index] + item.time + 250);
+        // 250ms is added to the time to account for the pause between phrases
+        acc.push(acc[index] + item.time + phrasesData.pause);
         return acc;
       },
       [0]
