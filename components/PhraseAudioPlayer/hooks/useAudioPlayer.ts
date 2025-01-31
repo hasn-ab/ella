@@ -73,8 +73,6 @@ export function useAudioPlayer() {
     );
     soundRef.current = sound;
     if (status?.isLoaded) {
-      const fileDuration =
-        (status as AVPlaybackStatusSuccess).durationMillis || 0;
       setCurrentStatus(status);
       await sound.playAsync();
     } else {
@@ -96,7 +94,7 @@ export function useAudioPlayer() {
   // this function seeks to the previous phrase in the audio using previous prefix start time
   const seekToPreviousPhrase = useCallback(() => {
     const previousPhraseIndex =
-      currentIndex + 1 < 0 ? phrases.length - 1 : currentIndex + 1;
+      currentIndex - 1 < 0 ? phrases.length - 1 : currentIndex - 1;
     const previousPhrase = phrases[previousPhraseIndex];
     if (previousPhrase) {
       soundRef.current?.setPositionAsync(startTimes[previousPhraseIndex]);
