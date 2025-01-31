@@ -25,6 +25,11 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+Expo Go QR (Available for limited time) New QR can be requested.
+<img width="199" alt="Screenshot 2025-02-01 at 1 07 46 AM" src="https://github.com/user-attachments/assets/5433233d-fea5-4e9d-883a-ff414d8c1cec" />
+
+
+
 ## Demo
 
 
