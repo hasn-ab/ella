@@ -59,7 +59,7 @@ export function useAudioPlayer() {
   const playAudio = useCallback(async () => {
     const { sound, status } = await Audio.Sound.createAsync(
       require("@/assets/sampleAudio.mp3"),
-      { shouldPlay: true, progressUpdateIntervalMillis: 100 },
+      { shouldPlay: true, progressUpdateIntervalMillis: 100, isLooping: true },
       updateCurrentIndex
     );
     soundRef.current = sound;

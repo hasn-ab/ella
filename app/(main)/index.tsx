@@ -16,8 +16,14 @@ import { useAudioPlayer } from "@/components/PhraseAudioPlayer/hooks/useAudioPla
 export default function HomeScreen() {
   const { styles } = useThemedStyles(makeStyles);
 
-  const { currentIndex, audioDuration, currentDurationInMillis } =
-    useAudioPlayer();
+  const {
+    currentIndex,
+    audioDuration,
+    currentDurationInMillis,
+    isPlaying,
+    pause,
+    resume,
+  } = useAudioPlayer();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,6 +32,8 @@ export default function HomeScreen() {
         <AudioPlayer
           fileDurationInMillis={audioDuration}
           currentDurationInMillis={currentDurationInMillis}
+          isPlaying={isPlaying}
+          onPlayPress={isPlaying ? pause : resume}
         />
       </View>
     </SafeAreaView>
