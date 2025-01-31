@@ -23,6 +23,8 @@ export default function HomeScreen() {
     isPlaying,
     pause,
     resume,
+    seekToNextPhrase,
+    seekToPreviousPhrase,
   } = useAudioPlayer();
 
   return (
@@ -34,6 +36,8 @@ export default function HomeScreen() {
           currentDurationInMillis={currentDurationInMillis}
           isPlaying={isPlaying}
           onPlayPress={isPlaying ? pause : resume}
+          onForwardPress={seekToNextPhrase}
+          onBackwardPress={seekToPreviousPhrase}
         />
       </View>
     </SafeAreaView>

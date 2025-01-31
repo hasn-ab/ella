@@ -13,6 +13,8 @@ interface AudioPlayerProps {
   fileDurationInMillis: number;
   isPlaying: boolean;
   onPlayPress: () => void;
+  onForwardPress: () => void;
+  onBackwardPress: () => void;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -20,6 +22,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   currentDurationInMillis,
   isPlaying = false,
   onPlayPress,
+  onForwardPress,
+  onBackwardPress,
 }) => {
   const { styles, colors } = useThemedStyles(makeStyles);
 
@@ -52,11 +56,21 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       </View>
 
       <View style={styles.playerContainer}>
-        <Ionicons name="play-back-sharp" size={24} color="black" />
+        <Ionicons
+          name="play-back-sharp"
+          size={24}
+          color="black"
+          onPress={onBackwardPress}
+        />
         <TouchableOpacity style={styles.playIcon} onPress={onPlayPress}>
           <Ionicons name={playIcon} size={28} color={colors.contentAccent} />
         </TouchableOpacity>
-        <Ionicons name="play-forward-sharp" size={24} color="black" />
+        <Ionicons
+          name="play-forward-sharp"
+          size={24}
+          color="black"
+          onPress={onForwardPress}
+        />
       </View>
     </View>
   );

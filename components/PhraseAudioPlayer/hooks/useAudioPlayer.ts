@@ -3,12 +3,22 @@ import { Audio, AVPlaybackStatusSuccess } from "expo-av";
 import { massagePhrasesData } from "@/utils/phrasesDataUtils";
 import phrasesData from "@/constants/example_audio.json";
 
+/**
+ *  Custom hook to manage the audio player state.
+ *  @returns {Object} An object containing the current index,
+ *  audio duration, current duration, isPlaying status, pause,
+ *  resume, seekToNextPhrase, and seekToPreviousPhrase functions.
+ */
+
 export function useAudioPlayer() {
-  const phrases = useMemo(() => massagePhrasesData(phrasesData), []);
-  const soundRef = useRef<Audio.Sound | null>(null);
   const [currentStatus, setCurrentStatus] =
     useState<AVPlaybackStatusSuccess | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const timeoutRef = useRef(null);
+  const soundRef = useRef<Audio.Sound | null>(null);
+
+  const phrases = useMemo(() => massagePhrasesData(phrasesData), []);
   const startTimes = useMemo(() => {
     // find prefix start times
     return phrases.reduce(
@@ -19,8 +29,6 @@ export function useAudioPlayer() {
       [0]
     );
   }, [phrases]);
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Binary search to find current index
   const findCurrentIndex = useCallback(
@@ -73,6 +81,27 @@ export function useAudioPlayer() {
     }
   }, [updateCurrentIndex]);
 
+  // this function seeks to the next phrase in the audio using next prefix start time
+  const seekToNextPhrase = useCallback(() => {
+    const nextPhraseIndex =
+      currentIndex + 1 > phrases.length - 1 ? 0 : currentIndex + 1;
+    console.log("nextPhraseIndex", { currentIndex, nextPhraseIndex });
+    const nextPhrase = phrases[nextPhraseIndex];
+    if (nextPhrase) {
+      soundRef.current?.setPositionAsync(startTimes[nextPhraseIndex]);
+    }
+  }, [currentIndex]);
+
+  // this function seeks to the previous phrase in the audio using previous prefix start time
+  const seekToPreviousPhrase = useCallback(() => {
+    const previousPhraseIndex =
+      currentIndex + 1 < 0 ? phrases.length - 1 : currentIndex + 1;
+    const previousPhrase = phrases[previousPhraseIndex];
+    if (previousPhrase) {
+      soundRef.current?.setPositionAsync(startTimes[previousPhraseIndex]);
+    }
+  }, [currentIndex]);
+
   // cleanup resources when the component unmounts
   useEffect(() => {
     playAudio();
@@ -98,8 +127,7 @@ export function useAudioPlayer() {
     resume: async () => {
       await soundRef.current?.playAsync();
     },
-    seek: async (position: number) => {
-      await soundRef.current?.setPositionAsync(position);
-    },
+    seekToNextPhrase,
+    seekToPreviousPhrase,
   };
 }
