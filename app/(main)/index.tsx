@@ -11,15 +11,22 @@ import { Colors } from "@/styles/hooks/Colors";
 import { useThemedStyles } from "@/styles/hooks/useThemeStyles";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAudioPlayer } from "@/components/PhraseAudioPlayer/hooks/useAudioPlayer";
 
 export default function HomeScreen() {
   const { styles } = useThemedStyles(makeStyles);
 
+  const { currentIndex, audioDuration, currentDurationInMillis } =
+    useAudioPlayer();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <PhraseList />
-        <AudioPlayer />
+        <PhraseList currentActiveIndex={currentIndex} />
+        <AudioPlayer
+          fileDurationInMillis={audioDuration}
+          currentDurationInMillis={currentDurationInMillis}
+        />
       </View>
     </SafeAreaView>
   );

@@ -1,12 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useThemedStyles } from "@/styles/hooks/useThemeStyles";
 import { Colors } from "@/styles/hooks/Colors";
 import { Spacing } from "@/styles/Spacing";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Slider } from "react-native-elements";
+import { formatDuration } from "@/utils/timeFormatUtils";
 
-const AudioPlayer = () => {
+interface AudioPlayerProps {
+  // time in milliseconds
+  currentDurationInMillis: number;
+  fileDurationInMillis: number;
+}
+
+const AudioPlayer: React.FC<AudioPlayerProps> = ({
+  fileDurationInMillis,
+  currentDurationInMillis,
+}) => {
   const { styles, colors } = useThemedStyles(makeStyles);
   return (
     <View style={styles.container}>
@@ -20,8 +30,12 @@ const AudioPlayer = () => {
       />
 
       <View style={styles.timeContainer}>
-        <Text style={styles.timeText}>00:00</Text>
-        <Text style={styles.timeText}>01:09</Text>
+        <Text style={styles.timeText}>
+          {formatDuration(currentDurationInMillis)}
+        </Text>
+        <Text style={styles.timeText}>
+          {formatDuration(fileDurationInMillis)}
+        </Text>
       </View>
 
       <View style={styles.playerContainer}>
