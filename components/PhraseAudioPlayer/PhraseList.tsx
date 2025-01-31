@@ -52,7 +52,7 @@ const PhraseList: React.FC<PhraseListProps> = ({ currentActiveIndex }) => {
   );
 };
 
-export default PhraseList;
+export default React.memo(PhraseList);
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({

@@ -66,6 +66,8 @@ const PhraseItem: React.FC<PhraseItemProps> = ({
   );
 };
 
+export default React.memo(PhraseItem);
+
 const makePhraseItemsStyles = (colors: Colors) =>
   StyleSheet.create({
     container: {
