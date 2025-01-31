@@ -25,15 +25,13 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## Demo
 
-When you're ready, run:
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+https://github.com/user-attachments/assets/090a6d53-ce16-4ae3-82f8-ea817381bf4a
+
+
 
 ## Learn more
 
