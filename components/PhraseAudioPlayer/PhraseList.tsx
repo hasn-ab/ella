@@ -5,26 +5,39 @@ import phrasesData from "@/constants/example_audio.json";
 import { useThemedStyles } from "@/styles/hooks/useThemeStyles";
 import { massagePhrasesData } from "@/utils/phrasesDataUtils";
 import { Spacing } from "@/styles/Spacing";
-import { PhraseItem } from "./PhraseItem";
+import PhraseItem from "./PhraseItem";
 
-const PhraseList = () => {
+/**
+ * PhraseList component renders a list of phrases with alternating alignment.
+ * It uses PhraseItem to render each phrase.
+ *
+ * @returns {JSX.Element} The rendered PhraseList component.
+ */
+
+export interface PhraseListProps {
+  currentActiveIndex: number;
+}
+
+const PhraseList: React.FC<PhraseListProps> = ({ currentActiveIndex }) => {
   const { styles } = useThemedStyles(makeStyles);
 
   // convert the phrasesData to Phrase type and store it in phrases to ensure that the data is only converted once
   const phrases = useMemo(() => massagePhrasesData(phrasesData), []);
 
-  const renderItem: ListRenderItem<Phrase> = useCallback(({ item, index }) => {
-    return (
-      <PhraseItem
-        phrase={item}
-        // alternate the alignment of the message based on the index
-        // todo: update it once we have requirements for the alignment
-        alignItem={index % 2 === 0 ? "left" : "right"}
-        // todo change this once we have the list item highlight logic in place
-        isActive={index % 2 !== 0}
-      />
-    );
-  }, []);
+  const renderItem: ListRenderItem<Phrase> = useCallback(
+    ({ item, index }) => {
+      return (
+        <PhraseItem
+          phrase={item}
+          // alternate the alignment of the message based on the index
+          // todo: update it once we have requirements for the alignment
+          alignItem={index % 2 === 0 ? "left" : "right"}
+          isActive={currentActiveIndex === index}
+        />
+      );
+    },
+    [currentActiveIndex]
+  );
 
   return (
     <View style={styles.container}>

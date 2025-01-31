@@ -3,6 +3,7 @@ import { useThemedStyles } from "@/styles/hooks/useThemeStyles";
 import { Spacing } from "@/styles/Spacing";
 import { StyleSheet, ViewStyle, View, Text } from "react-native";
 import { useStyle } from "react-native-style-utilities";
+import React from "react";
 
 type PhraseItemProps = {
   phrase: Phrase;
@@ -11,7 +12,7 @@ type PhraseItemProps = {
   isActive: boolean;
 };
 
-export const PhraseItem: React.FC<PhraseItemProps> = ({
+const PhraseItem: React.FC<PhraseItemProps> = ({
   phrase,
   style,
   alignItem,
@@ -28,7 +29,7 @@ export const PhraseItem: React.FC<PhraseItemProps> = ({
       },
       style,
     ],
-    [style]
+    [style, isActive]
   );
 
   const speakerNameStyle = useStyle(
@@ -40,7 +41,7 @@ export const PhraseItem: React.FC<PhraseItemProps> = ({
         color: isActive ? colors.contentAccent : colors.contentPrimary,
       },
     ],
-    []
+    [styles, isActive]
   );
   const phraseStyle = useStyle(
     () => [
@@ -53,7 +54,7 @@ export const PhraseItem: React.FC<PhraseItemProps> = ({
           : colors.backgroundSecondary,
       },
     ],
-    []
+    [isActive, colors]
   );
 
   return (
