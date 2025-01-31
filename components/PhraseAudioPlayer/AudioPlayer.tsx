@@ -35,7 +35,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   return (
     <View style={styles.container}>
       <Slider
-        allowTouchTrack={false}
+        disabled={true}
         style={styles.slider}
         maximumTrackTintColor={colors.backgroundBlueTint}
         minimumTrackTintColor={colors.contentAccent}
