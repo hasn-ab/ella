@@ -18,15 +18,22 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   currentDurationInMillis,
 }) => {
   const { styles, colors } = useThemedStyles(makeStyles);
+
+  const sliderValue = Math.ceil(currentDurationInMillis / 1000);
+  const maxSliderValue = Math.ceil(fileDurationInMillis / 1000);
+
   return (
     <View style={styles.container}>
       <Slider
+        allowTouchTrack={false}
         style={styles.slider}
         maximumTrackTintColor={colors.backgroundBlueTint}
         minimumTrackTintColor={colors.contentAccent}
         thumbStyle={styles.sliderThumb}
         trackStyle={styles.trackStyle}
-        value={5}
+        maximumValue={maxSliderValue}
+        minimumValue={0}
+        value={sliderValue}
       />
 
       <View style={styles.timeContainer}>
