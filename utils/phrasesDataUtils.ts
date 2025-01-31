@@ -5,18 +5,28 @@
  * @returns {Phrase[]} An array of phrases with additional speakerName property.
  */
 export function massagePhrasesData(conversation: DefaultConversation) {
-  const phrases: Phrase[] = [];
+  const { speakers } = conversation;
+  const result: Phrase[] = [];
 
-  conversation.speakers.forEach((speaker: DefaultSpeaker) => {
-    speaker.phrases.forEach((defaultPhrase: DefaultPhrase) => {
-      const phrase: Phrase = {
-        ...defaultPhrase,
-        speakerName: speaker.name,
-      };
+  // determine the maximum number of phrases any speaker has
+  // this will be used to loop through all possible indexes
+  const maxLength = Math.max(
+    ...speakers.map((speaker) => speaker.phrases.length)
+  );
 
-      phrases.push(phrase);
-    });
-  });
+  // loop through each index up to the maximum length, to make sure we have all phrases
+  for (let i = 0; i < maxLength; i++) {
+    for (const speaker of speakers) {
+      // check if the current speaker has a phrase at this index
+      if (i < speaker.phrases.length) {
+        result.push({
+          speakerName: speaker.name,
+          words: speaker.phrases[i].words,
+          time: speaker.phrases[i].time,
+        });
+      }
+    }
+  }
 
-  return phrases;
+  return result;
 }
