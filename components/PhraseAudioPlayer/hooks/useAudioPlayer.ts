@@ -84,7 +84,6 @@ export function useAudioPlayer() {
   const seekToNextPhrase = useCallback(() => {
     const nextPhraseIndex =
       currentIndex + 1 > phrases.length - 1 ? 0 : currentIndex + 1;
-    console.log("nextPhraseIndex", { currentIndex, nextPhraseIndex });
     const nextPhrase = phrases[nextPhraseIndex];
     if (nextPhrase) {
       soundRef.current?.setPositionAsync(startTimes[nextPhraseIndex]);
